@@ -24,5 +24,5 @@ async def receive_signal(signal: Signal):
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))  # Railway sẽ cấp PORT qua biến môi trường
+    port = int(os.environ.get("PORT", 8080))  # Railway sẽ cấp PORT qua biến môi trường
     uvicorn.run("main:app", host="0.0.0.0", port=port)
