@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from trade_parser import parse_trade_message
 from send_to_mt5 import send_order_to_mt5
+import os
+import uvicorn
 
 app = FastAPI()
 
@@ -19,3 +21,8 @@ async def receive_signal(signal: Signal):
 
     send_order_to_mt5(trade)
     return {"status": "success", "parsed": trade}
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))  # Railway sẽ cấp PORT qua biến môi trường
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
